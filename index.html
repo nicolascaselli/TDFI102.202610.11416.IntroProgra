@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales del Curso - IntroProgra</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; color: #24292e; max-width: 800px; margin: 0 auto; }
+        h1 { color: #0366d6; border-bottom: 1px solid #e1e4e8; padding-bottom: 10px; font-size: 24px; }
+        .file-list { list-style-type: none; padding: 0; }
+        .file-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #f6f8fa; transition: background 0.2s; }
+        .file-item:hover { background-color: #f6f8fa; }
+        .file-item a { color: #0366d6; text-decoration: none; font-weight: 500; flex-grow: 1; }
+        .file-item a:hover { text-decoration: underline; }
+        .icon { margin-right: 10px; font-size: 18px; }
+        .meta-info { font-size: 12px; color: #586069; }
+        .back-btn { display: inline-block; margin-bottom: 15px; padding: 6px 12px; background: #fafbfc; border: 1px solid #e1e4e8; border-radius: 6px; color: #0366d6; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .back-btn:hover { background: #f3f4f6; }
+    </style>
+</head>
+<body>
+
+    <h1>📚 TDFI102 - Introducción a la Programación</h1>
+    <div id="navigation"></div>
+    <ul id="files" class="file-list">Cargando archivos del curso...</ul>
+
+    <script>
+        // Configuración automática basada en tu repositorio
+        const USER = 'nicolascaselli';
+        const REPO = 'TDFI102.202610.11416.IntroProgra';
+
+        // Capturar la ruta actual desde los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPath = urlParams.get('path') || '';
+
+        async function loadRepositoryContent(path) {
+            const fileListElement = document.getElementById('files');
+            const navElement = document.getElementById('navigation');
+
+            // Renderizar botón de regresar si estamos dentro de una carpeta
+            if (path) {
+                const parentPath = path.substring(0, path.lastIndexOf('/'));
+                navElement.innerHTML = `<a class="back-btn" href="?path=${parentPath}">⬅ Volver atrás</a>`;
+            } else {
+                navElement.innerHTML = '';
+            }
+
+            try {
+                // Llamada directa a la API de GitHub
+                const response = await fetch(`https://github.com{USER}/${REPO}/contents/${path}`);
+                if (!response.ok) throw new Error('Error al conectar con GitHub');
+
+                const items = await response.json();
+                fileListElement.innerHTML = '';
+
+                // Ocultar archivos de configuración del sistema o el propio index
+                const filteredItems = items.filter(item => item.name !== 'index.html' && !item.name.startsWith('.'));
+
+                if (filteredItems.length === 0) {
+                    fileListElement.innerHTML = '<li class="file-item">📁 Esta carpeta está vacía.</li>';
+                    return;
+                }
+
+                // Separar carpetas primero y archivos después para orden jerárquico
+                filteredItems.sort((a, b) => (b.type === 'dir') - (a.type === 'dir'));
+
+                filteredItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'file-item';
+
+                    if (item.type === 'dir') {
+                        // Es una carpeta: Al hacer clic, recarga la página mostrando su interior
+                        li.innerHTML = `
+                            <span class="icon">📁</span>
+                            <a href="?path=${item.path}">${item.name}/</a>
+                            <span class="meta-info">Carpeta</span>
+                        `;
+                    } else {
+                        // Es un archivo: Descarga directa o visualización según el navegador
+                        // Usamos jsDelivr para servir archivos como código de forma limpia, o el link de GitHub Pages correspondiente
+                        let fileUrl = item.download_url;
+                        if(item.name.endsWith('.html') || item.name.endsWith('.pdf')) {
+                            fileUrl = window.location.origin + window.location.pathname + item.path;
+                        }
+
+                        li.innerHTML = `
+                            <span class="icon">📄</span>
+                            <a href="${fileUrl}" target="_blank">${item.name}</a>
+                            <span class="meta-info">${(item.size / 1024).toFixed(1)} KB</span>
+                        `;
+                    }
+                    fileListElement.appendChild(li);
+                });
+
+            } catch (error) {
+                fileListElement.innerHTML = `<li class="file-item" style="color:red;">⚠️ Error cargando los materiales: ${error.message}</li>`;
+            }
+        }
+
+        // Ejecutar carga inicial
+        loadRepositoryContent(currentPath);
+    </script>
+</body>
+</html>
