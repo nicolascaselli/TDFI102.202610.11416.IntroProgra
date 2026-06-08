@@ -1,0 +1,3 @@
+Andrés,Silva,9999999-9,39,Virgo,20200101,pollo,funk
+Andrés,Silva,9999999-9,39,Virgo,20200101,pollo,funk
+Nicolas,Caselli,41,Virgo,Pizza,Cumbia,

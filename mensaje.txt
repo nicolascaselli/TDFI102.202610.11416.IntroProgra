@@ -1,0 +1,2 @@
+Hola, este es mi primer archivo en Python.
+['estudiante 1', 5.5, 'Estudiante 2', 6.6]
