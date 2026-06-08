@@ -47,8 +47,9 @@
 
             try {
                 // Llamada directa a la API de GitHub
-                //const response = await fetch(`https://github.com{USER}/${REPO}/contents/${path}`);
-                const response = await fetch(`https://github.com${USER}/${REPO}/contents/${path}`);
+                //const response = await fetch(`https://github.com${USER}/${REPO}/contents/${path}`);
+                const response = await fetch('https://github.com{USER}/${REPO}/contents/${path}');
+
                 if (!response.ok) throw new Error('Error al conectar con GitHub');
 
                 const items = await response.json();
