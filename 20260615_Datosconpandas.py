@@ -79,4 +79,25 @@ plt.pie(valores, labels=etiquetas, autopct="%1.1f%%")
 plt.title("Distribución de pacientes por mayoría de edad")
 plt.show()
 
+def clasificar_presupuesto(presupuesto):
+    if presupuesto < 2000000:
+        return "Bajo"
+    elif presupuesto < 5000000:
+        return "Medio"
+    else:
+        return "Alto"
 
+df["categoria_presupuesto"] = df["presupuesto"].apply(clasificar_presupuesto)
+
+print(df[["primer_nombre", "apellido_paterno", "presupuesto", "categoria_presupuesto"]])
+conteo = df["categoria_presupuesto"].value_counts()
+
+plt.pie(
+    conteo,
+    labels=conteo.index,
+    autopct="%1.1f%%"
+)
+
+plt.title("Distribución por categoría de presupuesto")
+
+plt.show()
