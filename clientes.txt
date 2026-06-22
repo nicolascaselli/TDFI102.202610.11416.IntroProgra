@@ -1,0 +1,16 @@
+rut;nombre;tipo_cliente;email;direccion;telefono;valor_paquete
+72045634-0;MineGold SPA;Internacional;mgoldspa@gmail.com;Av. Los Carrera 123, Concepcion;930252324;3590000
+12789987-1;Matias Ossandon;Nacional;mossandon@gmail.com;Los Aromos 456, Santiago;930656463;3500000
+72012453-2;ConstruTrue SPA;Internacional;ctruespa@gmail.com;Av. Libertad 789, Vina del Mar;930876545;4350000
+18567234-5;Camila Rojas;Nacional;camila.rojas@gmail.com;Orompello 321, Concepcion;912345678;890000
+76123456-7;SurTravel Ltda;Nacional;contacto@surtravel.cl;Prat 245, Puerto Montt;922334455;1250000
+15432678-9;Felipe Andrade;Internacional;felipe.andrade@gmail.com;Apoquindo 5400, Las Condes;934567890;2750000
+77234567-8;Patagonia Tours SPA;Internacional;ventas@patagoniatours.cl;Bulnes 900, Punta Arenas;945678901;5200000
+16987654-3;Daniela Munoz;Nacional;daniela.munoz@gmail.com;Freire 678, Temuco;956789012;740000
+78345678-9;Andes Experience SPA;Internacional;reservas@andesexperience.cl;San Martin 1001, Mendoza;967890123;4100000
+19876543-2;Javier Soto;Nacional;javier.soto@gmail.com;Colon 222, Talcahuano;978901234;980000
+79456789-0;PacificTrip Ltda;Internacional;contacto@pacifictrip.cl;Av. Peru 1550, Vina del Mar;989012345;3650000
+17654321-4;Valentina Perez;Nacional;valentina.perez@gmail.com;Barros Arana 555, Concepcion;990123456;1120000
+70567890-1;Global Routes SPA;Internacional;info@globalroutes.cl;Av. Kennedy 7000, Santiago;901234567;6800000
+14321987-6;Rodrigo Fuentes;Nacional;rodrigo.fuentes@gmail.com;Chacabuco 333, Chillan;912398765;640000
+71678901-2;Destino Austral SPA;Internacional;ventas@destinoaustral.cl;Costanera 123, Valdivia;923459876;299000072045634-0; MineGold SPA; Internacional;mgoldspa@gmail.com;Av. Los Carrera 123; 3590000 
